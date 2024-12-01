@@ -1,0 +1,22 @@
+.controlGroup {
+    display: flex;
+    justify-content: end;
+}
+
+.text {
+    font-weight: 500;
+    font-size: 0.83em;
+    margin: 0 5px 0 5px;
+}
+
+.violinPlotTooltip {
+    position: absolute;
+    text-align: center;
+    padding: 8px;
+    font: 12px sans-serif;
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    pointer-events: none;
+    opacity: 0;
+}

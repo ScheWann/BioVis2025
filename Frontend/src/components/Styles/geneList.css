@@ -1,0 +1,19 @@
+.ant-card-body {
+    padding: 0;
+}
+
+.geneListTitle {
+    margin: 5px;
+    font-weight: 500;
+    font-size: 0.83em
+}
+
+.ant-card-head-wrapper {
+    display: flex;
+    justify-content: center;
+}
+
+.ant-card-extra {
+    margin: 0 !important;
+    width: 100%;
+}

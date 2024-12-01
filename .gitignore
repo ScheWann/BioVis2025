@@ -1,0 +1,8 @@
+.DS_Store
+/Frontend/src/data/expressionData.csv
+/Frontend/node_modules
+/data/FeatureMatrix.mtx
+/data/FeatureMatrix_precise.mtx
+/Python/output.csv
+/Backend/venv
+/Backend/__pycache__

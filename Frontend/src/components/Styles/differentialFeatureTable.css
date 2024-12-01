@@ -1,0 +1,11 @@
+.ant-table-cell {
+    padding: 2px !important;
+}
+
+.ant-pagination {
+    margin: 5px 0 !important;
+}
+
+.grayed-out-row {
+    color: #F5F5F5
+}

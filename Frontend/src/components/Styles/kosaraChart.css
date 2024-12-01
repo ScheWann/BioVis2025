@@ -1,0 +1,17 @@
+.ant-checkbox-checked .ant-checkbox-inner {
+    background-color: var(--background-color);
+    border-color: var(--border-color);
+}
+
+.kosaraTooltip {
+    position: absolute;
+    text-align: center;
+    padding: 8px;
+    font: 12px sans-serif;
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    pointer-events: none;
+    opacity: 0.9;
+    display: none;
+}
