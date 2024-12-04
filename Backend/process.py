@@ -43,6 +43,31 @@ tSNE_df = pd.read_csv("../Data/t-SNE_Projection.csv")
 tSNE_cluster_df = pd.read_csv("../Data/t-SNE_Graph_Based.csv")
 up_regulated_L2FC_genes_df = pd.read_csv("../Data/up_regulated_L2FC_genes.csv")
 
+# -------New setting---------
+skin_adata = sc.read_10x_h5("../New_Data/skin_TXK6Z4X_A1/binned_outputs/square_008um/filtered_feature_bc_matrix.h5")
+umap_df = pd.read_csv("../New_Data/skin_TXK6Z4X_A1/binned_outputs/square_008um/analysis/umap/gene_expression_2_components/projection.csv")
+kmeans_df = pd.read_csv("../New_Data/skin_TXK6Z4X_A1/binned_outputs/square_008um/analysis/clustering/gene_expression_kmeans_8_clusters/clusters.csv")
+skin_adata.var_names_make_unique()
+skin_umi_counts = skin_adata.to_df()
+
+kmeans_df['Cluster'] = kmeans_df['Cluster'].apply(lambda x: f"Cluster {x}")
+kmeans_df.rename(
+    columns={"Barcode": "barcode", "Cluster": "cluster"}, inplace=True
+)
+umap_df.rename(
+    columns={"Barcode": "barcode", "UMAP-1": "x", "UMAP-2": "y"}, inplace=True
+)
+total_counts = skin_umi_counts.sum(axis=1)
+
+cellTotal_df = pd.DataFrame(
+    {"barcode": total_counts.index, "total_counts": total_counts.values}
+)
+
+cell_umap_df = pd.merge(cellTotal_df, umap_df, on="barcode")
+cell_cluster_UMI_umap_df = pd.merge(cell_umap_df, kmeans_df, on="barcode")
+# ---------------------------
+
+
 # rename columns
 tSNE_df.rename(
     columns={"X Coordinate": "x", "Y Coordinate": "y", "Barcode": "barcode"},
@@ -210,6 +235,10 @@ def get_tSNE_data():
 
 def get_cell_cluster_UMI_tsne_df():
     return tSNE_cluster_df
+
+
+def get_cell_cluster_UMI_umap_df():
+    return cell_cluster_UMI_umap_df
 
 
 def get_up_regulated_L2FC_genes():

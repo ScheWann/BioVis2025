@@ -38,7 +38,26 @@ export const CellAnalysisChart = ({ selectedData, setHoveronTSNECell, showKosara
     };
 
     useEffect(() => {
-        fetch("/getTSNEData")
+        // fetch("/getTSNEData")
+        //     .then(res => res.json())
+        //     .then(data => {
+        //         const barcodes = Object.keys(data.barcode);
+        //         const transformedData = barcodes.map(index => ({
+        //             barcode: data.barcode[index],
+        //             total_counts: data.total_counts[index],
+        //             coordinates: {
+        //                 x: data.x[index],
+        //                 y: data.y[index]
+        //             },
+        //             cluster: data.cluster[index]
+        //         }))
+        //         const totalCounts = transformedData.map(d => d.total_counts);
+        //         const maxValue = Math.max(...Object.values(totalCounts));
+        //         const minValue = Math.min(...Object.values(totalCounts));
+        //         settSNEExpressionScale([minValue, maxValue]);
+        //         setTSNEData(transformedData);
+        //     });
+        fetch("/getUmapData")
             .then(res => res.json())
             .then(data => {
                 const barcodes = Object.keys(data.barcode);
@@ -52,8 +71,8 @@ export const CellAnalysisChart = ({ selectedData, setHoveronTSNECell, showKosara
                     cluster: data.cluster[index]
                 }))
                 const totalCounts = transformedData.map(d => d.total_counts);
-                const maxValue = Math.max(...Object.values(totalCounts));
-                const minValue = Math.min(...Object.values(totalCounts));
+                const maxValue = totalCounts.reduce((max, val) => (val > max ? val : max), -Infinity);
+                const minValue = totalCounts.reduce((min, val) => (val < min ? val : min), Infinity);
                 settSNEExpressionScale([minValue, maxValue]);
                 setTSNEData(transformedData);
             });
@@ -301,7 +320,7 @@ export const CellAnalysisChart = ({ selectedData, setHoveronTSNECell, showKosara
             .attr("text-anchor", "middle")
             .attr("font-weight", "bold")
             .attr("font-size", "0.8em")
-            .text("t-SNE 1");
+            .text("UMAP-1");
 
         // y-axis label
         svgElement.append("text")
@@ -311,7 +330,7 @@ export const CellAnalysisChart = ({ selectedData, setHoveronTSNECell, showKosara
             .attr("font-weight", "bold")
             .attr("font-size", "0.8em")
             .attr("text-anchor", "middle")
-            .text("t-SNE 2");
+            .text("UMAP-2");
 
         svgElement.call(zoom);
         zoomRef.current = zoom;

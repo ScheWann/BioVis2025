@@ -1,5 +1,5 @@
 from flask import Flask, jsonify, request
-from process import (get_gene_list, get_gene_expression, get_kosara_data, get_UMI_totalCounts, get_tSNE_data, get_cell_cluster_UMI_tsne_df, get_up_regulated_L2FC_genes, get_log2_violin_plot_data, get_logNorm_violin_plot_data, get_linear_violin_plot_data)
+from process import (get_gene_list, get_gene_expression, get_kosara_data, get_UMI_totalCounts, get_tSNE_data, get_cell_cluster_UMI_tsne_df, get_up_regulated_L2FC_genes, get_log2_violin_plot_data, get_logNorm_violin_plot_data, get_linear_violin_plot_data, get_cell_cluster_UMI_umap_df)
 app = Flask(__name__)
 
 
@@ -32,6 +32,10 @@ def get_cellClusterUMItsne():
 @app.route('/getTSNEData')
 def get_tSNEData():
     return jsonify(get_tSNE_data().to_dict())
+
+@app.route('/getUmapData')
+def get_umapData():
+    return jsonify(get_cell_cluster_UMI_umap_df().to_dict())
 
 @app.route('/getUpRegulatedL2FCGenesbyPage')
 def get_upRegulatedL2FCGenes():
