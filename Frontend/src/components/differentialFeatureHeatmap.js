@@ -27,7 +27,7 @@ export const DifferentialFeatureHeatmap = ({ differentialChartData }) => {
             { cluster: 'Cluster 6', gene: feature.FeatureName, value: feature.cluster6L2FC },
             { cluster: 'Cluster 7', gene: feature.FeatureName, value: feature.cluster7L2FC },
             { cluster: 'Cluster 8', gene: feature.FeatureName, value: feature.cluster8L2FC },
-            { cluster: 'Cluster 9', gene: feature.FeatureName, value: feature.cluster9L2FC },
+            // { cluster: 'Cluster 9', gene: feature.FeatureName, value: feature.cluster9L2FC },
         ]);
         setFeatureL2FCScale(d3.extent(data, d => d.value));
         if (!heatmapTooltip.current) {
@@ -42,7 +42,7 @@ export const DifferentialFeatureHeatmap = ({ differentialChartData }) => {
             .padding(0.1);
 
         const yScale = d3.scaleBand()
-            .domain(d3.range(9).map(i => `Cluster ${i + 1}`))
+            .domain(d3.range(8).map(i => `Cluster ${i + 1}`))
             .range([margin.top, height - margin.bottom])
             .padding(0.1);
 
