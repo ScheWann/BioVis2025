@@ -1,6 +1,7 @@
 .DS_Store
 /Frontend/src/data/expressionData.csv
 /Frontend/node_modules
+/New_Data
 /data/FeatureMatrix.mtx
 /data/FeatureMatrix_precise.mtx
 /Python/output.csv
